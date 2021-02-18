@@ -1,0 +1,32 @@
+# Test the sros_config module
+---
+
+- name: create backup of running-config
+  sros_config:
+    provider: "{{ cli }}"
+    backup: yes
+
+- name: create service and loop through each command
+  sros_config:
+    lines:
+        - "{{ item }}"
+    parents:
+      - configure
+      - service
+    provider: "{{ cli }}"
+  register: service_settings_output
+  loop: "{{ service_settings }}"
+
+- name: print the registered var for service settings
+  debug:
+    var: service_settings_output
+
+- name: create VLAN and loop through each command
+  sros_config:
+    lines:
+        - "{{ item }}"
+    parents:
+      - configure
+      - vlan
+    provider: "{{ cli }}"
+  loop: "{{ vlan_settings }}"

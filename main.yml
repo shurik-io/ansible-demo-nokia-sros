@@ -1,0 +1,30 @@
+---
+- name: demo playbook
+  hosts: all  
+  #hosts: localhost
+  connection: local
+
+  tasks:
+  - name: include vars
+    include_vars: vars.yml
+
+  - import_tasks: tasks/command.yml
+    tags: 'demo::command'
+
+  - import_tasks: tasks/rollback.yml
+    tags: 'demo::rollback'
+
+  - import_tasks: tasks/config_details.yml
+    tags: 'demo::config:details'
+
+  - import_tasks: tasks/config_single_line.yml
+    tags: 'demo::config:single'
+
+  - import_tasks: tasks/config_loop_vars.yml
+    tags: 'demo::config:loop'
+
+  - import_tasks: tasks/config_file.yml
+    tags: 'demo::config:file'
+
+    
+

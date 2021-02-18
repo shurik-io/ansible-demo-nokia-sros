@@ -1,0 +1,16 @@
+# Test the sros_config module
+---
+
+- name: create backup of running-config
+  sros_config:
+    provider: "{{ cli }}"
+    backup: yes
+
+- name: collect system details/defaults and print them
+  sros_config:
+    defaults: yes
+  register: config_details
+
+- name: print config_details
+  debug:
+    var: config_details

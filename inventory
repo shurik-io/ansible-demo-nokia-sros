@@ -1,0 +1,3 @@
+# inventory
+[pop]
+nokia # ansible_host = <ipaddr>

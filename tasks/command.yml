@@ -1,0 +1,33 @@
+# Test the sros_command module
+---
+- name: run show version on remote devices
+  sros_command:
+    commands: show version
+    provider: "{{ cli }}"
+
+- name: run multiple commands on remote devices
+  sros_command:
+    commands:
+      - show version
+      - show port detail
+    provider: "{{ cli }}"
+
+- name: run show equipment slot on remote devices
+  sros_command:
+    commands: show equipment slot
+    provider: "{{ cli }}"
+  register: slots_output
+
+- name: debug - print  slots_output registered variable
+  debug:
+    var: slots_output
+
+- name: run show sap-using on remote devices
+  sros_command:
+    commands: show sap-using
+    provider: "{{ cli }}"
+  register: sap_output
+
+- name: debug - print registered sap-using registered variable
+  debug:
+    var: sap_output

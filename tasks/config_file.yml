@@ -1,0 +1,13 @@
+# Test the sros_config module
+---
+
+- name: create backup of running-config
+  sros_config:
+    provider: "{{ cli }}"
+    backup: yes
+
+- name: create customer and VLAN from config file
+  sros_config:
+    src: customer43_config.cfg
+    provider: "{{ cli }}"
+  loop: "{{ vlan_settings }}"

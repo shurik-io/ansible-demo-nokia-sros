@@ -1,0 +1,20 @@
+---
+# define vars for demo playbook
+cli:
+    host: "{{ inventory_hostname }}"
+    username: admin
+    password: admin
+    #ssh_keyfile: <path to private key>
+    transport: cli
+
+service_settings:
+  - vpls 3420 customer 3420 create
+  - vpls 3420 description 42_MGMT
+  - vpls 3420 sap lag-1:3420 create
+  - vpls sap lt:1/1/1:3420  create
+  - vpls 3420 no shutdown
+
+vlan_id: 3420
+vlan_settings:
+  - id {{ vlan_id }} mode residential-bridge name 42_MGMT new-broadcast enable new-secure-fwd enable ipv6-mcast-ctrl
+  - id {{ vlan_id }} dhcp-opt82-ext enable circuit-id-dhcp physical-id remote-id-dhcp customer-id

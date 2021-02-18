@@ -1,0 +1,19 @@
+# Test the sros_config module
+---
+
+- name: create backup of running-config
+  sros_config:
+    provider: "{{ cli }}"
+    backup: yes
+
+- name: set system name to "new-name" using single line
+  sros_config:
+    lines:
+        - configure system name new-name
+    provider: "{{ cli }}"
+
+- name: create customer as single line
+  sros_config:
+    lines:
+        - configure service customer 3420 description "Customer_42"
+    provider: "{{ cli }}"

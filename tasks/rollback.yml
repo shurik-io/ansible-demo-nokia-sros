@@ -1,0 +1,8 @@
+# Test the sros_rollback module
+---
+
+- name: configure rollback location
+  sros_rollback:
+    rollback_location: "cb3:/ansible"
+    state: present # change to absent to remove
+    provider: "{{ cli }}"
